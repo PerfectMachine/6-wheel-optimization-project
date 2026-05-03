@@ -1,0 +1,320 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mujoco>
+
+	<option timestep="1e-4"/>
+	<option gravity="0 0 -9.8"/>
+
+    <worldbody>
+
+        <!--Polygon-->
+        <body name="floor" pos="0 0 0">
+            <geom type="plane" size="10 10 0.1"/>
+        </body>
+        <!--Rover starts here-->
+        <!--Base body-->
+        <body pos = "0 0 1">
+            <joint name = "cart" type = "free"/>
+            <geom type = "box" size = "1 0.6 0.1"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "0.9 0.5 -0.2"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "0.3 0.5 -0.2"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "-0.3 0.5 -0.2"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "-0.9 0.5 -0.2"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "0.9 -0.5 -0.2"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "0.3 -0.5 -0.2"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "-0.3 -0.5 -0.2"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "-0.9 -0.5 -0.2"/>
+
+            <!--Wheel bases start here-->
+            <!--First pair-->
+            <body pos = "0.5 0 -0.25">
+                <geom type = "box" size = "0.03 0.03 0.15" rgba = "1 1 0 1" pos = "0 -0.2 0"/>
+                <geom type = "box" size = "0.03 0.03 0.15" rgba = "1 1 0 1" pos = "0 0.2 0"/>
+                <geom type = "box" size = "0.03 0.3 0.03" rgba = "1 1 0 1" pos = "0.06 0 0.1"/>
+                <geom type = "box" size = "0.03 0.3 0.03" rgba = "1 1 0 1" pos = "0.06 0 -0.1"/>
+
+                <!--Double Wishbone starts here-->
+                <!--Left Upper Arm-->
+                <body pos = "0.12 0.27 0.1">
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" size ="0.03 0.03" euler = "0 90 0" rgba ="1 0 0 1"/>
+                    <body>
+                        <joint type = "hinge" axis = "1 0 0"/>
+                        <geom type = "box" size = "0.03 0.2 0.03" pos = "0 0.2 0"/> <!-- size = "0.03 N 0.03"... pos = "0 N 0"-->
+                        <body pos = "0 0.42 0"> <!-- body pos = "0 -(2*N+0.02) 0"-->
+                            <joint type = "ball"/>
+                            <geom type = "sphere" size = "0.03" />
+                            <site name ="upLArm1" size = "0.03" rgba = "0 0 0 0.4"/>
+                        </body>
+                    </body>
+                </body>
+
+                <!--Left Lower Arm-->
+                <body pos = "0.12 0.27 -0.1">
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" size ="0.03 0.03" euler = "0 90 0" rgba ="1 0 0 1"/>
+                    <body>
+                        <joint type = "hinge" axis = "1 0 0"/>
+                        <geom type = "box" size = "0.03 0.2 0.03" pos = "0 0.2 0"/> <!-- size = "0.03 N 0.03"... pos = "0 N 0"-->
+                        <body pos = "0 0.42 0"> <!-- body pos = "0 -(2*N+0.02) 0"-->
+                            <joint type = "ball"/>
+                            <geom type = "sphere" size = "0.03" />
+                            <site name ="downLArm1" size = "0.03" rgba = "0 0 0 0.4"/>
+                        </body>
+                    </body>
+                </body>
+
+                <!--Right Upper Arm-->
+                <body pos = "0.12 -0.27 0.1">
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" size ="0.03 0.03" euler = "0 90 0" rgba ="1 0 0 1"/>
+                    <body>
+                        <joint type = "hinge" axis = "1 0 0"/>
+                        <geom type = "box" size = "0.03 0.2 0.03" pos = "0 -0.2 0"/> <!-- size = "0.03 N 0.03"... pos = "0 N 0"-->
+                        <body pos = "0 -0.42 0"> <!-- body pos = "0 -(2*N+0.02) 0"-->
+                            <joint type = "ball"/>
+                            <geom type = "sphere" size = "0.03" />
+                            <site name ="upRArm1" size = "0.03" rgba = "0 0 0 0.4"/>
+                        </body>
+                    </body>
+                </body>
+
+                <!--Right Lower Arm-->
+                <body pos = "0.12 -0.27 -0.1">
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" size ="0.03 0.03" euler = "0 90 0" rgba ="1 0 0 1"/>
+                    <body>
+                        <joint type = "hinge" axis = "1 0 0"/>
+                        <geom type = "box" size = "0.03 0.2 0.03" pos = "0 -0.2 0"/> <!-- size = "0.03 N 0.03"... pos = "0 N 0"-->
+                        <body pos = "0 -0.42 0">
+                            <joint type = "ball"/>
+                            <geom type = "sphere" size = "0.03" />
+                            <site name ="downRArm1" size = "0.03" rgba = "0 0 0 0.4"/>
+                        </body>
+                    </body>
+                </body>
+
+                <!--Wheels-->
+                <body pos = "0.1 0.75 0">
+                    <joint name = "wheelL1" type = "hinge" axis = "0 1 0"/>
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" euler = "90 0 0" size = "0.25 0.05"/>
+                    <site name = "connectLUp1" size = "0.03" pos = "0 -0.05 0.15" rgba = "0 0 1 1"/>
+                    <site name = "connectLDown1" size = "0.03" pos = "0 -0.05 -0.15" rgba = "0 0 1 1"/>
+                </body>
+
+                <body pos = "0.1 -0.75 0">
+                    <joint name = "wheelR1" type = "hinge" axis = "0 1 0"/>
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" euler = "90 0 0" size = "0.25 0.05"/>
+                    <site name = "connectRUp1" size = "0.03" pos = "0 0.05 0.15" rgba = "0 0 1 1"/>
+                    <site name = "connectRDown1" size = "0.03" pos = "0 0.05 -0.15" rgba = "0 0 1 1"/>
+                </body>
+
+            </body>
+            <!--Second pair-->
+            <body pos = "-0.1 0 -0.25">
+                <geom type = "box" size = "0.03 0.03 0.15" rgba = "1 1 0 1" pos = "0 -0.2 0"/>
+                <geom type = "box" size = "0.03 0.03 0.15" rgba = "1 1 0 1" pos = "0 0.2 0"/>
+                <geom type = "box" size = "0.03 0.3 0.03" rgba = "1 1 0 1" pos = "0.06 0 0.1"/>
+                <geom type = "box" size = "0.03 0.3 0.03" rgba = "1 1 0 1" pos = "0.06 0 -0.1"/>
+
+                <!--Double Wishbone starts here-->
+                <!--Left Upper Arm-->
+                <body pos = "0.12 0.27 0.1">
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" size ="0.03 0.03" euler = "0 90 0" rgba ="1 0 0 1"/>
+                    <body>
+                        <joint type = "hinge" axis = "1 0 0"/>
+                        <geom type = "box" size = "0.03 0.2 0.03" pos = "0 0.2 0"/> <!-- size = "0.03 N 0.03"... pos = "0 N 0"-->
+                        <body pos = "0 0.42 0"> <!-- body pos = "0 -(2*N+0.02) 0"-->
+                            <joint type = "ball"/>
+                            <geom type = "sphere" size = "0.03" />
+                            <site name ="upLArm2" size = "0.03" rgba = "0 0 0 0.4"/>
+                        </body>
+                    </body>
+                </body>
+
+                <!--Left Lower Arm-->
+                <body pos = "0.12 0.27 -0.1">
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" size ="0.03 0.03" euler = "0 90 0" rgba ="1 0 0 1"/>
+                    <body>
+                        <joint type = "hinge" axis = "1 0 0"/>
+                        <geom type = "box" size = "0.03 0.2 0.03" pos = "0 0.2 0"/> <!-- size = "0.03 N 0.03"... pos = "0 N 0"-->
+                        <body pos = "0 0.42 0"> <!-- body pos = "0 -(2*N+0.02) 0"-->
+                            <joint type = "ball"/>
+                            <geom type = "sphere" size = "0.03" />
+                            <site name ="downLArm2" size = "0.03" rgba = "0 0 0 0.4"/>
+                        </body>
+                    </body>
+                </body>
+
+                <!--Right Upper Arm-->
+                <body pos = "0.12 -0.27 0.1">
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" size ="0.03 0.03" euler = "0 90 0" rgba ="1 0 0 1"/>
+                    <body>
+                        <joint type = "hinge" axis = "1 0 0"/>
+                        <geom type = "box" size = "0.03 0.2 0.03" pos = "0 -0.2 0"/> <!-- size = "0.03 N 0.03"... pos = "0 N 0"-->
+                        <body pos = "0 -0.42 0"> <!-- body pos = "0 -(2*N+0.02) 0"-->
+                            <joint type = "ball"/>
+                            <geom type = "sphere" size = "0.03" />
+                            <site name ="upRArm2" size = "0.03" rgba = "0 0 0 0.4"/>
+                        </body>
+                    </body>
+                </body>
+
+                <!--Right Lower Arm-->
+                <body pos = "0.12 -0.27 -0.1">
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" size ="0.03 0.03" euler = "0 90 0" rgba ="1 0 0 1"/>
+                    <body>
+                        <joint type = "hinge" axis = "1 0 0"/>
+                        <geom type = "box" size = "0.03 0.2 0.03" pos = "0 -0.2 0"/> <!-- size = "0.03 N 0.03"... pos = "0 N 0"-->
+                        <body pos = "0 -0.42 0">
+                            <joint type = "ball"/>
+                            <geom type = "sphere" size = "0.03" />
+                            <site name ="downRArm2" size = "0.03" rgba = "0 0 0 0.4"/>
+                        </body>
+                    </body>
+                </body>
+
+                <!--Wheels-->
+                <body pos = "0.1 0.75 0">
+                    <joint name = "wheelL2" type = "hinge" axis = "0 1 0"/>
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" euler = "90 0 0" size = "0.25 0.05"/>
+                    <site name = "connectLUp2" size = "0.03" pos = "0 -0.05 0.15" rgba = "0 0 1 1"/>
+                    <site name = "connectLDown2" size = "0.03" pos = "0 -0.05 -0.15" rgba = "0 0 1 1"/>
+                </body>
+
+                <body pos = "0.1 -0.75 0">
+                    <joint name = "wheelR2" type = "hinge" axis = "0 1 0"/>
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" euler = "90 0 0" size = "0.25 0.05"/>
+                    <site name = "connectRUp2" size = "0.03" pos = "0 0.05 0.15" rgba = "0 0 1 1"/>
+                    <site name = "connectRDown2" size = "0.03" pos = "0 0.05 -0.15" rgba = "0 0 1 1"/>
+                </body>
+
+            </body>
+
+
+            <!--Third pair-->
+            <body pos = "-0.7 0 -0.25">
+                <geom type = "box" size = "0.03 0.03 0.15" rgba = "1 1 0 1" pos = "0 -0.2 0"/>
+                <geom type = "box" size = "0.03 0.03 0.15" rgba = "1 1 0 1" pos = "0 0.2 0"/>
+                <geom type = "box" size = "0.03 0.3 0.03" rgba = "1 1 0 1" pos = "0.06 0 0.1"/>
+                <geom type = "box" size = "0.03 0.3 0.03" rgba = "1 1 0 1" pos = "0.06 0 -0.1"/>
+
+                <!--Double Wishbone starts here-->
+                <!--Left Upper Arm-->
+                <body pos = "0.12 0.27 0.1">
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" size ="0.03 0.03" euler = "0 90 0" rgba ="1 0 0 1"/>
+                    <body>
+                        <joint type = "hinge" axis = "1 0 0"/>
+                        <geom type = "box" size = "0.03 0.2 0.03" pos = "0 0.2 0"/> <!-- size = "0.03 N 0.03"... pos = "0 N 0"-->
+                        <body pos = "0 0.42 0"> <!-- body pos = "0 -(2*N+0.02) 0"-->
+                            <joint type = "ball"/>
+                            <geom type = "sphere" size = "0.03" />
+                            <site name ="upLArm3" size = "0.03" rgba = "0 0 0 0.4"/>
+                        </body>
+                    </body>
+                </body>
+
+                <!--Left Lower Arm-->
+                <body pos = "0.12 0.27 -0.1">
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" size ="0.03 0.03" euler = "0 90 0" rgba ="1 0 0 1"/>
+                    <body>
+                        <joint type = "hinge" axis = "1 0 0"/>
+                        <geom type = "box" size = "0.03 0.2 0.03" pos = "0 0.2 0"/> <!-- size = "0.03 N 0.03"... pos = "0 N 0"-->
+                        <body pos = "0 0.42 0"> <!-- body pos = "0 -(2*N+0.02) 0"-->
+                            <joint type = "ball"/>
+                            <geom type = "sphere" size = "0.03" />
+                            <site name ="downLArm3" size = "0.03" rgba = "0 0 0 0.4"/>
+                        </body>
+                    </body>
+                </body>
+
+                <!--Right Upper Arm-->
+                <body pos = "0.12 -0.27 0.1">
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" size ="0.03 0.03" euler = "0 90 0" rgba ="1 0 0 1"/>
+                    <body>
+                        <joint type = "hinge" axis = "1 0 0"/>
+                        <geom type = "box" size = "0.03 0.2 0.03" pos = "0 -0.2 0"/> <!-- size = "0.03 N 0.03"... pos = "0 N 0"-->
+                        <body pos = "0 -0.42 0"> <!-- body pos = "0 -(2*N+0.02) 0"-->
+                            <joint type = "ball"/>
+                            <geom type = "sphere" size = "0.03" />
+                            <site name ="upRArm3" size = "0.03" rgba = "0 0 0 0.4"/>
+                        </body>
+                    </body>
+                </body>
+
+                <!--Right Lower Arm-->
+                <body pos = "0.12 -0.27 -0.1">
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" size ="0.03 0.03" euler = "0 90 0" rgba ="1 0 0 1"/>
+                    <body>
+                        <joint type = "hinge" axis = "1 0 0"/>
+                        <geom type = "box" size = "0.03 0.2 0.03" pos = "0 -0.2 0"/> <!-- size = "0.03 N 0.03"... pos = "0 N 0"-->
+                        <body pos = "0 -0.42 0">
+                            <joint type = "ball"/>
+                            <geom type = "sphere" size = "0.03" />
+                            <site name ="downRArm3" size = "0.03" rgba = "0 0 0 0.4"/>
+                        </body>
+                    </body>
+                </body>
+
+                <!--Wheels-->
+                <body pos = "0.1 0.75 0">
+                    <joint name = "wheelL3" type = "hinge" axis = "0 1 0"/>
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" euler = "90 0 0" size = "0.25 0.05"/>
+                    <site name = "connectLUp3" size = "0.03" pos = "0 -0.05 0.15" rgba = "0 0 1 1"/>
+                    <site name = "connectLDown3" size = "0.03" pos = "0 -0.05 -0.15" rgba = "0 0 1 1"/>
+                </body>
+
+                <body pos = "0.1 -0.75 0">
+                    <joint name = "wheelR3" type = "hinge" axis = "0 1 0"/>
+                    <joint type = "hinge" axis = "1 0 0"/>
+                    <geom type = "cylinder" euler = "90 0 0" size = "0.25 0.05"/>
+                    <site name = "connectRUp3" size = "0.03" pos = "0 0.05 0.15" rgba = "0 0 1 1"/>
+                    <site name = "connectRDown3" size = "0.03" pos = "0 0.05 -0.15" rgba = "0 0 1 1"/>
+                </body>
+
+            </body>
+        </body>
+
+
+
+    </worldbody>
+
+    <equality>
+        <connect site1="upLArm1" site2="connectLUp1"/>
+        <connect site1="downLArm1" site2="connectLDown1"/>
+        <connect site1="upRArm1" site2="connectRUp1"/>
+        <connect site1="downRArm1" site2="connectRDown1"/>
+
+        <connect site1="upLArm2" site2="connectLUp2"/>
+        <connect site1="downLArm2" site2="connectLDown2"/>
+        <connect site1="upRArm2" site2="connectRUp2"/>
+        <connect site1="downRArm2" site2="connectRDown2"/>
+
+        <connect site1="upLArm3" site2="connectLUp3"/>
+        <connect site1="downLArm3" site2="connectLDown3"/>
+        <connect site1="upRArm3" site2="connectRUp3"/>
+        <connect site1="downRArm3" site2="connectRDown3"/>
+    </equality>
+
+    <actuator>
+        <motor name="firstMotor" joint="wheelL1" ctrllimited="true" ctrlrange="-100 100" gear="20"/>
+        <motor name="secondMotor" joint="wheelR1" ctrllimited="true" ctrlrange="-100 100" gear="20"/>
+        <motor name="thirdMotor" joint="wheelL2" ctrllimited="true" ctrlrange="-100 100" gear="20"/>
+        <motor name="fourthMotor" joint="wheelR2" ctrllimited="true" ctrlrange="-100 100" gear="20"/>
+        <motor name="fifthMotor" joint="wheelL3" ctrllimited="true" ctrlrange="-100 100" gear="20"/>
+        <motor name="sixthMotor" joint="wheelR3" ctrllimited="true" ctrlrange="-100 100" gear="20"/>
+    </actuator>
+
+</mujoco>
