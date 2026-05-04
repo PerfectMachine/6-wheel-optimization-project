@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mujoco>
+
+	<option timestep="1e-4"/>
+	<option gravity="0 0 -9.8"/>
+
+    <worldbody>
+
+        <!--Polygon-->
+        <body name="floor" pos="0 0 0">
+            <geom type="plane" size="10 10 0.1"/>
+        </body>
+        <!--Rover starts here-->
+        <!--Base body-->
+        <body pos = "0 0 1">
+            <joint name = "cart" type = "free"/>
+            <geom type = "box" size = "1 0.6 0.1"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "0.9 0.5 -0.2"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "0.3 0.5 -0.2"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "-0.3 0.5 -0.2"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "-0.9 0.5 -0.2"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "0.9 -0.5 -0.2"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "0.3 -0.5 -0.2"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "-0.3 -0.5 -0.2"/>
+            <geom type = "box" size = "0.1 0.1 0.1" pos = "-0.9 -0.5 -0.2"/>
+
+            <!--First Pair-->
+            <body pos = "0 0.7 0">
+                <joint type = "hinge" axis = "0 1 0"/>
+                <geom type = "cylinder" size = "0.05 0.1" euler = "90 0 0" rgba = "1 0 0 1"/>
+                <body pos = "0.3 0 0">
+                    <geom type = "box" size = "0.9 0.05 0.05"/>
+                    <body  pos = "1.2 0 -0.33" euler = "0 45 0">
+                        <geom type = "box" size = "0.5 0.05 0.05"/>
+                        <body pos = "0.45 0.1 0">
+                            <joint name = "wheelLLead" type = "hinge" axis = "0 1 0"/>
+                            <geom type = "cylinder" size = "0.2 0.05" euler = "90 0 0"/>
+                        </body>
+                    </body>
+                    <body  pos = "-1.07 0 -0.19" euler = "0 -45 0">
+                        <geom type = "box" size = "0.3 0.05 0.05"/>
+                        <body pos = "-0.25 0.1 0">
+                            <joint type = "hinge" axis = "0 1 0"/>
+                            <geom type = "cylinder" size = "0.05 0.05" euler = "90 0 0" rgba = "1 0 0 1"/>
+                            <body euler = "0 45 0">
+                                <geom type = "box" size = "0.9 0.05 0.05"/>
+                                <body pos = "1.05 0 -0.17" euler = "0 45 0">
+                                    <geom type = "box" size = "0.25 0.05 0.05"/>
+                                    <body pos = "0.2 0.1 0">
+                                        <joint name = "wheelLMid" type = "hinge" axis = "0 1 0"/>
+                                        <geom type = "cylinder" size = "0.2 0.05" euler = "90 0 0"/>
+                                    </body>
+                                </body>
+                                <body pos = "-1.05 0 -0.17" euler = "0 -45 0">
+                                    <geom type = "box" size = "0.25 0.05 0.05"/>
+                                    <body pos = "-0.2 0.1 0">
+                                        <joint name = "wheelLEnd" type = "hinge" axis = "0 1 0"/>
+                                        <geom type = "cylinder" size = "0.2 0.05" euler = "90 0 0"/>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>    
+                </body>    
+            </body>
+
+            <!--Second Pair-->
+            <body pos = "0 -0.7 0">
+                <joint type = "hinge" axis = "0 1 0"/>
+                <geom type = "cylinder" size = "0.05 0.1" euler = "90 0 0" rgba = "1 0 0 1"/>
+                <body pos = "0.3 0 0">
+                    <geom type = "box" size = "0.9 0.05 0.05"/>
+                    <body  pos = "1.2 0 -0.33" euler = "0 45 0">
+                        <geom type = "box" size = "0.5 0.05 0.05"/>
+                        <body pos = "0.45 -0.1 0">
+                            <joint name = "wheelRLead" type = "hinge" axis = "0 1 0"/>
+                            <geom type = "cylinder" size = "0.2 0.05" euler = "90 0 0"/>
+                        </body>
+                    </body>
+                    <body  pos = "-1.07 0 -0.19" euler = "0 -45 0">
+                        <geom type = "box" size = "0.3 0.05 0.05"/>
+                        <body pos = "-0.25 -0.1 0">
+                            <joint type = "hinge" axis = "0 1 0"/>
+                            <geom type = "cylinder" size = "0.05 0.05" euler = "90 0 0" rgba = "1 0 0 1"/>
+                            <body euler = "0 45 0">
+                                <geom type = "box" size = "0.9 0.05 0.05"/>
+                                <body pos = "1.05 0 -0.17" euler = "0 45 0">
+                                    <geom type = "box" size = "0.25 0.05 0.05"/>
+                                    <body pos = "0.2 -0.1 0">
+                                        <joint name = "wheelRMid" type = "hinge" axis = "0 1 0"/>
+                                        <geom type = "cylinder" size = "0.2 0.05" euler = "90 0 0"/>
+                                    </body>
+                                </body>
+                                <body pos = "-1.05 0 -0.17" euler = "0 -45 0">
+                                    <geom type = "box" size = "0.25 0.05 0.05"/>
+                                    <body pos = "-0.2 -0.1 0">
+                                        <joint name = "wheelREnd" type = "hinge" axis = "0 1 0"/>
+                                        <geom type = "cylinder" size = "0.2 0.05" euler = "90 0 0"/>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>    
+                </body>    
+            </body>
+
+        </body>
+    </worldbody>
+
+    <actuator>
+        <motor name="firstMotor" joint="wheelLLead" ctrllimited="true" ctrlrange="-100 100" gear="20"/>
+        <motor name="secondMotor" joint="wheelLMid" ctrllimited="true" ctrlrange="-100 100" gear="20"/>
+        <motor name="thirdMotor" joint="wheelLEnd" ctrllimited="true" ctrlrange="-100 100" gear="20"/>
+        <motor name="fourthMotor" joint="wheelRLead" ctrllimited="true" ctrlrange="-100 100" gear="20"/>
+        <motor name="fifthMotor" joint="wheelRMid" ctrllimited="true" ctrlrange="-100 100" gear="20"/>
+        <motor name="sixthMotor" joint="wheelREnd" ctrllimited="true" ctrlrange="-100 100" gear="20"/>
+    </actuator>
+
+</mujoco>
