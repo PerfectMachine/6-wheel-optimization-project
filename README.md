@@ -10,5 +10,5 @@ A repository history of project for ITMO university about optimization of rover.
 - [ ] Optimization code
 
 ### Needed changes
-- [x] Add damping to double wishbone
+- [x] Add damping to double wishbone (by 10.05.2026)
 - [ ] Add the list of optimization parameters
