@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mujoco>
+
+	<option timestep="1e-4"/>
+	<option gravity="0 0 -9.8"/>
+
+    <asset>
+        <!-- nrow and ncol define resolution, size is (x_half, y_half, z_height, z_base) -->
+        <hfield name="lowPeaks" nrow="100" ncol="100" size="15 10 0.6 0.1" file = "lowPeaks.png"/>
+        <hfield name="highPeaks" nrow="100" ncol="100" size="15 10 4.5 0.01" file = "highPeaks.png"/>
+        <hfield name="dirt" nrow="100" ncol="100" size="15 10 0.3 0.1" file = "lowPeaks.png"/>
+    </asset>
+
+    <worldbody>
+
+        <!--Polygon-->
+        <body name="basePolygon" pos="55 0 0">
+            <geom type="plane" size="65 10 0.1" pos = "5 0 0"/>
+            <geom type = "box" size = "65 1 5" pos = "5 10 5" rgba = "0 0 1 0.05"/>
+            <geom type = "box" size = "65 1 5" pos = "5 -10 5" rgba = "0 0 1 0.05"/>
+            <geom type = "box" size = "1 10 5" pos = "70 0 5" rgba = "0 0 1 0.05"/>
+            <geom type = "box" size = "1 10 10" pos = "-70 0 5" rgba = "0 0 1 0.05"/>
+
+            <geom type = "box" size = "1 10 0.2" pos = "-49.1 0 -0.25" euler = "0 15 0" rgba = "1 0 0 1"/>
+            <geom type = "cylinder" size = "2 0.2" pos = "-55 0 0" rgba = "0 0 0 1"/>
+
+            <geom type = "box" size = "5 10 0.2" pos = "-55 0 0" rgba = "1 0 0 1"/>
+            <geom type = "box" size = "1 10 0.2" pos = "-20.9 0 -0.25" euler = "0 -15 0" rgba = "1 1 0 1"/>
+            <geom type = "box" size = "5 10 0.2" pos = "-15 0 0" rgba = "1 1 0 1"/>
+            <geom type = "box" size = "5 10 0.2" pos = "25 0 0" rgba = "0 1 0 1"/>
+            <geom type = "box" size = "2 10 0.2" pos = "18.1 0 -0.5" euler = "0 -15 0" rgba = "0 1 0 1"/>
+            <geom type = "box" size = "5 10 0.2" pos = "65 0 0" rgba = "1 1 1 1"/>
+            <geom type = "cylinder" size = "2 0.2" pos = "65 0 0" rgba = "0 0 0 1"/>
+
+            <body name = "lowPeaks" pos="-35 0 0">
+                <geom type="hfield" hfield="lowPeaks" rgba = "0.7 1 0.7 1"/>
+            </body>
+            <body name = "highPeaks" pos="5 0 -1.5">
+                <geom type="hfield" hfield="highPeaks" rgba = "1 1 0.7 1"/>
+            </body>
+            <body name = "dirt" pos="45 0 0">
+                <geom type="hfield" hfield="dirt" rgba = "0.4 0.2 0.05 1" friction="5 5 5"/>
+            </body>
+        </body>
+
+    </worldbody>
+
+</mujoco>
